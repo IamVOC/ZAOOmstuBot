@@ -1,5 +1,5 @@
-from patterns import Singleton
-
+from app.patterns import Singleton
+from app.utils import deserialize, send_message, generate_payload, main_server_request
 
 class MessageHandler(metaclass=Singleton):
     
@@ -11,21 +11,21 @@ class MessageHandler(metaclass=Singleton):
 
     def default_state(self, json):
         chat_id, message = deserialize(json)
-        cmhandler = support_objects['CommandHandler']()
+        cmhandler = self.support['CommandHandler']
         handled, widgets = cmhandler.handle(message)
-        if !handled:
+        if not handled:
             predicted_message = main_server_request(message)
             send_message(generate_payload(chat_id, predicted_message))
-            return 200, ''
+            return 'OK', 200
         send_message(generate_payload(chat_id, handled, widgets=widgets))
-        return 200, ''
+        return 'OK', 200
 
     def update_state(self, state, support_objects=None):
         self.state = state
         self.support = support_objects
 
     def handle(self, json):
-        return state(json)
+        return self.state(json)
    
 
 
@@ -36,7 +36,7 @@ class CommandHandler:
                 '/start': self.default_start_command
                 }
 
-    def default_start_command():
+    def default_start_command(self):
         return "<b>ZAO bot</b> - это бот в котором вы наверняка сможете найти ответ на ваш вопрос по заочному образованию. Если вы хотите получить ответ, то просто напишите мне нужный вопрос", None
 
     def change_commands(self, command, action):
@@ -44,6 +44,6 @@ class CommandHandler:
 
     def handle(self, message):
         if message in self.command_dicts:
-            return command_dicts[message]
+            return self.command_dicts[message]()
         return None, None
 

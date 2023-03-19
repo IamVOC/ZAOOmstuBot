@@ -1,4 +1,5 @@
 import requests
+from decouple import config 
 from os import environ
 
 def deserialize(json):
@@ -8,17 +9,17 @@ def deserialize(json):
 
 def main_server_request(message):
     payload = {
-            "bot_guid": environ('BOT_GUID'),
+            "bot_guid": environ['BOT_GUID'],
             "message": message
             }
-    return requests.get(environ('MAIN_SERVER_ADRESS'))
+    return requests.get(config('MAIN_SERVER_ADRESS'))
                  
 def send_message(payload):
-    token = environ('TOKEN')
-    url = f'https://api.telegram.org/bot{token}/send_message'
+    token = config('TOKEN')
+    url = f'https://api.telegram.org/bot{token}/sendMessage'
     return requests.post(url, json=payload)
 
-def generate_payload(chat_id, text=None, widgets):
+def generate_payload(chat_id, text=None, widgets=None):
     payload = {
             "parse_mode": "HTML",
             "chat_id": chat_id
