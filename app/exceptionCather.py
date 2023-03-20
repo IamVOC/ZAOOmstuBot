@@ -1,6 +1,6 @@
-from patterns import Singleton
-from exceptionHandler import exceptionHandler
-from logger import proxyLogger
+from app.patterns import Singleton
+from app.exceptionHandler import exceptionHandler
+from app.logger import proxyLogger
 
 class exceptionCather(metaclass=Singleton):
 
