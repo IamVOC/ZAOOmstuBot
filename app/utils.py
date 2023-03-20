@@ -9,7 +9,7 @@ def deserialize(json):
 
 def main_server_request(message):
     payload = {
-            "bot_guid": environ['BOT_GUID'],
+            "bot_guid": config('BOT_GUID'),
             "message": message
             }
     return requests.get(config('MAIN_SERVER_ADRESS'))
