@@ -10,7 +10,7 @@ ZAOBot - это чат бот для мессенджера, который по
 
 Бот был создан студентами ОмГТУ кафедры ПМиФИ.
 
-![Иллюстрация работы бота](https://github.com/IamVOC/ZAOOmstuBot/tree/develop/img/image.jpg?raw=true)
+![image](https://user-images.githubusercontent.com/93713018/227122985-d5cb97fb-bbfa-4680-a935-bd0ca5cbb7fb.jpg)
 
 ## Установка
 
