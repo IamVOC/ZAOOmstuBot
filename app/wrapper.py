@@ -17,7 +17,5 @@ class App:
     def set_webhook(self):
         token = config('TOKEN')
         webhook_url = config('WEBHOOK_URL')
-        print(token)
-        print(webhook_url)
         webhook = f"https://api.telegram.org/bot{token}/setWebhook?url={webhook_url}"
         return requests.get(webhook)

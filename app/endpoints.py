@@ -17,4 +17,4 @@ class EndpointActions:
 
 def main_route_post(json):
     mh = MessageHandler()
-    return MessageHandler().handle(json)
+    return mh.handle(json)

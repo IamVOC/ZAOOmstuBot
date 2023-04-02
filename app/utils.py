@@ -1,6 +1,7 @@
 import requests
 from decouple import config 
 from os import environ
+import json
 
 def deserialize(json):
     chat_id = json['message']['chat']['id']
@@ -12,7 +13,7 @@ def main_server_request(message):
             "bot_guid": config('BOT_GUID'),
             "message": message
             }
-    return requests.get(config('MAIN_SERVER_ADRESS'))
+    return requests.post(config('MAIN_SERVER_ADDRESS'), json=payload)
                  
 def send_message(payload):
     token = config('TOKEN')
@@ -27,8 +28,5 @@ def generate_payload(chat_id, text=None, widgets=None):
     
     if(text):
         payload['text'] = text
-
-    if(widgets):
-        payload.update(widgets)
 
     return payload

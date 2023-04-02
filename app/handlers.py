@@ -15,7 +15,7 @@ class MessageHandler(metaclass=Singleton):
         handled, widgets = cmhandler.handle(message)
         if not handled:
             predicted_message = main_server_request(message)
-            send_message(generate_payload(chat_id, predicted_message))
+            send_message(generate_payload(chat_id, predicted_message.json()['answer']))
             return 'OK', 200
         send_message(generate_payload(chat_id, handled, widgets=widgets))
         return 'OK', 200
@@ -37,7 +37,7 @@ class CommandHandler:
                 }
 
     def default_start_command(self):
-        return "<b>ZAO bot</b> - это бот в котором вы наверняка сможете найти ответ на ваш вопрос по заочному образованию. Если вы хотите получить ответ, то просто напишите мне нужный вопрос", None
+        return "<b>ZAO bot</b> - это бот в котором вы наверняка сможете найти ответ на ваш вопрос по заочному образованию. Если вы хотите получить ответ, то просто напишите мне нужный вопрос", 200
 
     def change_commands(self, command, action):
         self.command_dicts[command] = action
