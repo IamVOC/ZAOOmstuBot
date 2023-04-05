@@ -13,6 +13,12 @@ def deserialize_tg(json):
     text = json['message']['text']
     return chat_id, text
 
+def vk_default_state(json):
+    chat_id, message = deserialize_vk(json)
+    send_message_vk(generate_payload_vk(chat_id, handled, widgets=widgets))
+    return 'OK', 200
+
+
 def main_server_request(message):
     payload = {
             "bot_guid": config('BOT_GUID'),
