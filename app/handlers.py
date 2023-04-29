@@ -15,7 +15,7 @@ class MessageHandler(metaclass=Singleton):
         cmhandler = self.support['CommandHandler']
         handled, widgets = cmhandler.handle(message)
         if not handled:
-            predicted_message = main_server_request(message)
+            predicted_message = main_server_request(chat_id, message)
             send_message(generate_payload(
                 chat_id, predicted_message.json()['answer']))
             return 'OK', 200
